@@ -1,0 +1,19 @@
+{
+  "name": "ticketingsystem",
+  "version": "1.0.0",
+  "description": "This is a Ticketing System",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Misel",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^7.0.0",
+    "mongoose": "^4.4.17",
+    "morgan": "^1.7.0"
+  }
+}

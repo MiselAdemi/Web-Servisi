@@ -1,0 +1,33 @@
+<article class="container" style="margin-top:-18px;">
+
+    <section class="well well-small mePadd" ng-controller="TaskController as task">
+        <h2 class="meFont" style="padding-bottom:30px;"><span class="glyphicon glyphicon-comment"></span> Tickets</h2>
+
+        <div ng-if="task.tasks.length > 0">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="overflow: hidden; ">
+                    <h3 class="col-lg-1">Mark</h3>
+                    <h3 class="col-lg-2">Title</h3>
+                    <h3 class="col-lg-2">Author</h3>
+                    <h3 class="col-lg-2">For</h3>
+                    <h3 class="col-lg-2">Status</h3>
+                </div>
+                <div class="panel-body" ng-repeat="t in task.tasks" ng-init="task.getTaskAuthor(t.author)">
+                    <p class="col-lg-1">{{ t.mark }}</p>
+                    <h4 class="col-lg-2">{{ t.title }}</h4>
+                    <p class="col-lg-2">{{ task.taskAuthor.username }}</p>
+                    <p class="col-lg-2">{{ t.task_to }}</p>
+                    <span class="col-lg-2"><div class="badge badge-success" style="width:50px;">{{ t.status }}</div></span>
+                    <span class="col-lg-3">
+                        <button>Close</button>
+                    </span><br>
+                    <hr>
+                    <p class="col-lg-12">
+                        {{ t.description }}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</article>

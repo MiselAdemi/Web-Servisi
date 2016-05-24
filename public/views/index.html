@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <base href="/">
+    <meta charset="UTF-8">
+    <title>Ticketing System</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
+
+    <!-- Controllers -->
+    <script type="text/javascript" src="controllers/authCtrl.js"></script>
+    <script type="text/javascript" src="controllers/userCtrl.js"></script>
+    <script type="text/javascript" src="controllers/taskCtrl.js"></script>
+
+    <!-- Services -->
+    <script type="text/javascript" src="services/authService.js"></script>
+    <script type="text/javascript" src="services/userService.js"></script>
+    <script type="text/javascript" src="services/taskService.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app.routes.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse" ng-controller="AuthController as main" style="position: static;">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".subnav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href=".">Support Center</a>
+
+            <div class="nav-collapse subnav-collapse">
+
+                <div class="pull-right">
+                    <ul ng-if="main.loggedIn" class="nav">
+                        <li>Welcome {{ main.user.username }}</li>
+                        <li class="divider-vertical"></li>
+                        <li ng-if="main.isAdmin"><a href="/create">Add new task</a> </li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="#" ng-click="main.doLogout()">Logout</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.nav-collapse -->
+        </div>
+    </div>
+    <!-- /navbar-inner -->
+</div>
+<!-- /navbar -->
+
+<div ng-view></div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="col-lg-4 col-lg-offset-4">
+        <form method="post" ng-submit="task.createTask()">
+            <div class="form-group">
+                <label>Mark</label>
+                <input type="text" class="input-block-level" name="mark" ng-model="task.taskData.mark" placeholder="Mark">
+            </div>
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="input-block-level" name="title" ng-model="task.taskData.title" placeholder="Title">
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="input-block-level" name="description" ng-model="task.taskData.description" placeholder="Description">
+            </div>
+
+            <div class="form-group">
+                <label>Assign to</label>
+                <input type="text" class="input-block-level" name="task_to" ng-model="task.taskData.task_to" placeholder="Assign to">
+            </div>
+
+            <div class="form-group">
+                <label>Priority</label>
+                <select name="priority" ng-model="task.taskData.priority" ng-options="opt as opt for opt in priority" ng-init="selected='Major'"></select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Create new task</button>
+        </form>
+    </div>
+</div>
