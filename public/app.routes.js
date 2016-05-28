@@ -19,6 +19,11 @@ angular.module('appRoutes', ['ngRoute'])
                 controller: 'TaskController',
                 controllerAs: 'task'
             })
+            .when('/new_project', {
+                templateUrl: 'views/pages/new_project.html',
+                controller: 'ProjectController',
+                controllerAs: 'project'
+            })
 
         $locationProvider.html5Mode(true);
 

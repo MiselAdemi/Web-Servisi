@@ -12,6 +12,9 @@ angular.module('authCtrl', ['authService'])
             Auth.getUser()
                 .then(function(data) {
                     vm.user = data.data;
+
+                    vm.getAdmin(vm.user._id);
+
                 });
         });
 
@@ -28,11 +31,19 @@ angular.module('authCtrl', ['authService'])
                             vm.user = data.data;
                         });
 
-                    if(data.success)
+                    
+
+                    if(data.success) {
+
                         $location.path('/dashboard');
+                    }
                     else
                         vm.error = data.message;
                 })
+
+
+
+            
         };
 
         vm.doLogout = function() {
@@ -47,10 +58,19 @@ angular.module('authCtrl', ['authService'])
                 });
         };
 
-        vm.getUserById = function() {
+        vm.getUserById = function(id) {
             Auth.getUserById(id)
                 .success(function (data) {
                     vm.otherUser = data;
+                })
+        }
+
+        vm.getAdmin = function(id) {
+            Auth.getUserById(id)
+                .success(function (data) {
+                    if(data.role == "admin") {
+                        vm.isAdmin = true;
+                    }
                 })
         }
 

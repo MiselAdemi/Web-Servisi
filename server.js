@@ -21,9 +21,11 @@ app.use(express.static(__dirname + '/public'));
 
 var users = require('./app/routes/users')(app, express);
 var tasks = require('./app/routes/tasks')(app, express);
+var projects = require('./app/routes/project')(app, express);
 
 app.use('/users', users);
 app.use('/tasks', tasks);
+app.use('/projects', projects);
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/public/views/index.html');

@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['appRoutes', 'authCtrl', 'authService', 'userService', 'userCtrl', 'taskCtrl', 'taskService'])
+var app = angular.module('myApp', ['appRoutes', 'authCtrl', 'authService', 'userService', 'userCtrl', 'taskCtrl', 'taskService', 'projectCtrl', 'projectService'])
 
 .config(function ($httpProvider) {
 

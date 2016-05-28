@@ -36,8 +36,12 @@ angular.module('authService', [])
             }
         };
 
-        authFactory.getUserById = function() {
-            return $http.get('/users/get', id);
+        authFactory.getUserById = function(id) {
+            return $http.get('/users/get/' + id);
+        };
+
+        authFactory.getAdmin = function(id) {
+            return $http.get('/users/get/' + id);
         };
 
 
