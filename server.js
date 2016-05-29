@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '/public'));
 
 var users = require('./app/routes/users')(app, express);
 var tasks = require('./app/routes/tasks')(app, express);
-var projects = require('./app/routes/project')(app, express);
+var projects = require('./app/routes/projects')(app, express);
 
 app.use('/users', users);
 app.use('/tasks', tasks);
