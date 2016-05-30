@@ -14,7 +14,7 @@ angular.module('appRoutes', ['ngRoute'])
             .when('/signup', {
                 templateUrl: 'views/pages/signup.html'
             })
-            .when('/create', {
+            .when('/create/:id', {
                 templateUrl: 'views/pages/create_task.html',
                 controller: 'TaskController',
                 controllerAs: 'task'

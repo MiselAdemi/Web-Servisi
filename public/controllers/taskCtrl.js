@@ -1,8 +1,9 @@
 angular.module('taskCtrl', ['taskService'])
 
-.controller('TaskController', function($rootScope, Task) {
+.controller('TaskController', function($rootScope, Task, $routeParams) {
 
         var vm = this;
+        vm.IdToAddTask = $routeParams.id;
 
         $rootScope.priority = [
             'Blocker',
@@ -32,6 +33,14 @@ angular.module('taskCtrl', ['taskService'])
             Task.getTaskAuthor(id)
                 .success(function (data) {
                     vm.taskAuthor = data;
+                })
+        };
+
+        //Nije task nego project
+        vm.getProjectById = function(id) {
+            Task.getProjectById(id)
+                .success(function (data) {
+                    vm.currentProject = data;
                 })
         }
 

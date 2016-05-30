@@ -39,15 +39,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href=".">Support Center</a>
+            <a class="brand" href="/dashboard">Ticketing System</a>
 
             <div class="nav-collapse subnav-collapse">
 
                 <div class="pull-right">
                     <ul ng-if="main.loggedIn" class="nav">
                         <li ng-show="main.loggedIn">Welcome {{ main.user.username }}</li>
-                        <li ng-show="main.isAdmin" class="divider-vertical"></li>
-                        <li ng-show="main.isAdmin"><a href="/create">Add new task</a> </li>
+                        <li class="divider-vertical"></li>
                         <li ng-show="main.isAdmin"><a href="/new_project">Add new project</a> </li>
                         <li class="divider-vertical"></li>
                         <li><a href="#" ng-click="main.doLogout()">Logout</a> </li>

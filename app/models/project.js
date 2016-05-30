@@ -14,6 +14,10 @@ var ProjectSchema = new Schema({
     author: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
 });
 

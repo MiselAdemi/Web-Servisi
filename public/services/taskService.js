@@ -16,6 +16,10 @@ angular.module('taskService', [])
             return $http.get('/users/get/' + id);
         };
 
+        taskFactory.getProjectById = function(id) {
+            return $http.get('/tasks/get/' + id);
+        };
+
         return taskFactory;
 
     });

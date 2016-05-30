@@ -33,6 +33,7 @@ module.exports = function(app, express) {
                 mark: req.body.mark,
                 description: req.body.description,
                 author: req.decoded._id,
+                status: "opened"
             });
 
             project.save(function (err, newProject) {

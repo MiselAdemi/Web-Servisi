@@ -1,7 +1,9 @@
 var User = require('../models/user');
+var Project = require('../models/project');
 var Task = require('../models/task');
 var config = require('../../config');
 var secretKey = config.secretKey;
+var mongo = require('mongodb');
 var jsonwebtoken = require('jsonwebtoken');
 
 module.exports = function(app, express) {
@@ -34,7 +36,7 @@ module.exports = function(app, express) {
                 title: req.body.title,
                 description: req.body.description,
                 author: req.decoded._id,
-                task_to: req.body.user_to,
+                task_to: req.body.task_to,
                 status: "to_do",
                 priority: req.body.priority
             });
@@ -59,6 +61,20 @@ module.exports = function(app, express) {
                 res.json(tasks);
             });
         });
+
+
+    router.get('/get/:id', function (req, res) {
+        var taskId = req.params.id;
+
+        Project.findOne({ _id: taskId}, function(err, task) {
+            if(err) {
+                res.send(err);
+                return;
+            }
+
+            res.json(task);
+        });
+    });
 
 
 
