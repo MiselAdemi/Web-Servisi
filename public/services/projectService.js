@@ -16,6 +16,22 @@ angular.module('projectService', [])
             return $http.get('/users/get/' + id);
         };
 
+        projectFactory.allUsers = function () {
+            return $http.get('/users/all');
+        }
+
+        projectFactory.addUser = function(userId, projectId) {
+            return $http.post('/projects/user/' + userId + "/" + projectId);
+        };
+
+        projectFactory.usersOnProject = function(id) {
+            return $http.get('/projects/allUsersOnProject/' + id);
+        }
+
+        projectFactory.potentialUsers = function(id) {
+            return $http.get('/projects/potentialUsers/' + id);
+        }
+
         return projectFactory;
 
     });

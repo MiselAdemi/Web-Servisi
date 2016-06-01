@@ -24,6 +24,11 @@ angular.module('appRoutes', ['ngRoute'])
                 controller: 'ProjectController',
                 controllerAs: 'project'
             })
+            .when('/add_user/:id', {
+                templateUrl: 'views/pages/project_add_user.html',
+                controller: 'ProjectController',
+                controllerAs: 'project'
+            })
 
         $locationProvider.html5Mode(true);
 

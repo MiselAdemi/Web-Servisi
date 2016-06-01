@@ -1,0 +1,47 @@
+<article class="container" style="margin-top:-18px;">
+    <br>
+
+    <section class="well well-small mePadd">
+        <h2 class="meFont" style="padding-bottom:30px;"><span class="glyphicon glyphicon-comment"></span> Add new user in project team</h2>
+
+        <div ng-if="project.users.length > 0">
+        <input type="text" ng-model="searchUser.username">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" style="overflow: hidden; ">
+                    <h3 class="col-sm-2">Username</h3>
+                    <h3 class="col-sm-2 col-sm-offset-8">Action</h3>
+                </div>
+                <div class="panel-body" ng-repeat="user in project.potentialUsers">
+                    <p class="col-sm-2">{{ user.username }}</p>
+
+                    <span class="col-sm-2 col-sm-offset-8">
+                        <a class="btn" href="#" ng-click="project.addUser(user._id, project.projectId)">Add</a>
+                    </span>
+                    <br><br>
+                    <hr>
+
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" style="overflow: hidden; ">
+                    <h3 class="col-sm-2">Username</h3>
+                    <h3 class="col-sm-2 col-sm-offset-8">Action</h3>
+                </div>
+                <div class="panel-body" ng-repeat="user in project.usersOnProject">
+                    <p class="col-sm-2">{{ user.username }}</p>
+
+                    <span class="col-sm-2 col-sm-offset-8">
+                        <a class="btn" href="#" ng-click="removeUser(user._id)">Remove</a>
+                    </span>
+                    <br><br>
+                    <hr>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</article>

@@ -16,8 +16,12 @@
                     <p class="col-lg-2">{{ project.ProjectAuthor.username }}</p>
                     <span class="col-lg-2"><div class="badge badge-success" style="width:50px;">{{ p.status }}</div></span>
 
-                    <a class="col-lg-2">
+                    <span class="col-lg-2">
                         <a class="btn" href="/create/{{ p._id }}">Add Task</a>
+                    </span>
+
+                    <span class="col-lg-2">
+                        <a class="btn" href="/add_user/{{ p._id }}">Add user</a>
                     </span>
 
                     <span class="col-lg-3">

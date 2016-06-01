@@ -1,6 +1,6 @@
 angular.module('taskCtrl', ['taskService'])
 
-.controller('TaskController', function($rootScope, Task, $routeParams) {
+.controller('TaskController', function($rootScope, Task, $routeParams, $location) {
 
         var vm = this;
         vm.IdToAddTask = $routeParams.id;
@@ -26,6 +26,7 @@ angular.module('taskCtrl', ['taskService'])
                     vm.taskData = '';
 
                     vm.message = data.message;
+                    $location.path('/dashboard');
                 });
         };
 
