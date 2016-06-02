@@ -4,6 +4,7 @@ angular.module('taskCtrl', ['taskService'])
 
         var vm = this;
         vm.IdToAddTask = $routeParams.id;
+        vm.taskTo = [];
 
         $rootScope.priority = [
             'Blocker',
@@ -34,6 +35,13 @@ angular.module('taskCtrl', ['taskService'])
             Task.getTaskAuthor(id)
                 .success(function (data) {
                     vm.taskAuthor = data;
+                })
+        };
+
+        vm.getTaskTo = function(id) {
+            Task.getTaskTo(id)
+                .success(function (data) {
+                    vm.taskTo.push(data);
                 })
         };
 

@@ -9,32 +9,36 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading" style="overflow: hidden; ">
-                    <h3 class="col-sm-2">Username</h3>
-                    <h3 class="col-sm-2 col-sm-offset-8">Action</h3>
+                    <h3 class="col-xs-2">Username</h3>
+                    <h3 class="col-xs-2 col-xs-offset-8">Action</h3>
                 </div>
-                <div class="panel-body" ng-repeat="user in project.potentialUsers">
-                    <p class="col-sm-2">{{ user.username }}</p>
+                <div ng-if="project.potentialUsers.length > 0" class="panel-body" ng-repeat="user in project.potentialUsers">
+                    <p class="col-xs-2">{{ user.username }}</p>
 
-                    <span class="col-sm-2 col-sm-offset-8">
-                        <a class="btn" href="#" ng-click="project.addUser(user._id, project.projectId)">Add</a>
+                    <span class="col-xs-2 col-xs-offset-8">
+                        <a class="btn btn-success" href="#" ng-click="project.addUser(user._id, project.projectId)">Add</a>
                     </span>
                     <br><br>
                     <hr>
 
+                </div>
+
+                <div ng-if="project.potentialUsers.length == 0" class="panel-body">
+                    <p class="col-xs-12">There is no user that can be added to this project</p>
                 </div>
             </div>
 
 
             <div class="panel panel-default">
                 <div class="panel-heading" style="overflow: hidden; ">
-                    <h3 class="col-sm-2">Username</h3>
-                    <h3 class="col-sm-2 col-sm-offset-8">Action</h3>
+                    <h3 class="col-xs-2">Username</h3>
+                    <h3 class="col-xs-2 col-xs-offset-8">Action</h3>
                 </div>
                 <div class="panel-body" ng-repeat="user in project.usersOnProject">
-                    <p class="col-sm-2">{{ user.username }}</p>
+                    <p class="col-xs-2">{{ user.username }}</p>
 
-                    <span class="col-sm-2 col-sm-offset-8">
-                        <a class="btn" href="#" ng-click="removeUser(user._id)">Remove</a>
+                    <span class="col-xs-2 col-xs-offset-8">
+                        <a class="btn btn-danger" href="#" ng-click="project.removeUser(user._id, project.projectId)">Remove</a>
                     </span>
                     <br><br>
                     <hr>

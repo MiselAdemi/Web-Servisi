@@ -61,9 +61,6 @@ module.exports = function(app, express) {
 
     router.route('/user/:userId/:projectId')
         .post(function(req, res) {
-            // Add user on project
-            console.log("ADD USER ON PROJECT" + req.params.userId);
-            console.log(req.params.projectId)
             
             var uop = new UserOnProject({
                 userId: req.params.userId,
@@ -80,7 +77,15 @@ module.exports = function(app, express) {
             })
         })
         .delete(function(req, res) {
-            // Remove user from project
+            UserOnProject.remove({ userId : req.params.userId, projectId : req.params.projectId }, function (err, deleteItem) {
+                if(err) {
+                    res.send(err);
+                    console.log(err);
+                    return;
+                }
+
+                res.json(deleteItem);
+            });
         });
 
 
@@ -121,7 +126,6 @@ module.exports = function(app, express) {
             for (var i = 0; i < usersOnProject.length; i++) {
                 idList.push(usersOnProject[i].userId);
             }
-            console.log(idList);
 
             User.find({ _id : {$in : idList } }, function (err, allUsersOnProject) {
                 if(err) {
@@ -139,13 +143,9 @@ module.exports = function(app, express) {
                                 var index = allUsersOnProject.indexOf(allUsersOnProject[i]);
                                 allUsers.splice(index, 1);
                             }
-                            else
-                                console.log("NOt equal");
 
                         }
                     }
-
-                    console.log(allUsers);
 
                     res.json(allUsers);
                 })

@@ -1,6 +1,6 @@
 angular.module('projectCtrl', ['projectService'])
 
-.controller('ProjectController', function($rootScope, Project, $routeParams) {
+.controller('ProjectController', function($rootScope, Project, $routeParams, $window) {
 
         var vm = this;
         vm.projectId = $routeParams.id;
@@ -24,7 +24,6 @@ angular.module('projectCtrl', ['projectService'])
         Project.potentialUsers(vm.projectId)
             .success(function (data) {
                 vm.potentialUsers = data;
-                console.log(data);
             })
 
         vm.createProject = function () {
@@ -50,6 +49,16 @@ angular.module('projectCtrl', ['projectService'])
             Project.addUser(userId, projectId)
                 .success(function(data) {
                     vm.addedUser = data;
+                    $window.location.reload();
+                })
+        }
+
+        vm.removeUser = function(userId, projectId) {
+
+            Project.removeUser(userId, projectId)
+                .success(function(data) {
+                    vm.removedUser = data;
+                    $window.location.reload();
                 })
         }
 

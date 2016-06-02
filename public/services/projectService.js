@@ -24,6 +24,10 @@ angular.module('projectService', [])
             return $http.post('/projects/user/' + userId + "/" + projectId);
         };
 
+        projectFactory.removeUser = function(userId, projectId) {
+            return $http.delete('/projects/user/' + userId + "/" + projectId);
+        };
+
         projectFactory.usersOnProject = function(id) {
             return $http.get('/projects/allUsersOnProject/' + id);
         }

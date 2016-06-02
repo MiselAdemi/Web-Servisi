@@ -4,8 +4,7 @@ var Schema = mongoose.Schema;
 var TaskSchema = new Schema({
     mark: {
         type: String,
-        required: true,
-        index: { unique: true}
+        required: true
     },
     title: {
         type: String,

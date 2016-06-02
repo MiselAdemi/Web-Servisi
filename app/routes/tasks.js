@@ -44,6 +44,7 @@ module.exports = function(app, express) {
             task.save(function (err, newTask) {
                 if(err) {
                     res.send(err);
+                    console.log(err);
                     return;
                 }
 

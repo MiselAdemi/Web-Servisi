@@ -18,7 +18,7 @@
             <div class="form-group">
                 <label>Assign to</label>
                <!-- <input type="text" class="input-block-level" name="task_to" ng-model="task.taskData.task_to" placeholder="Assign to"> -->
-                <select ng-controller="UserController as user" name="task_to" ng-model="task.taskData.task_to" ng-options="opt as opt.username for opt in user.users" "></select>
+                <select ng-controller="ProjectController as project" name="task_to" ng-model="task.taskData.task_to" ng-options="opt as opt.username for opt in project.usersOnProject" "></select>
             </div>
 
             <div class="form-group">
