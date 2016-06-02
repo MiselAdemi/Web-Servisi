@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="panel-body" ng-if="task.projectTasks.length > 0" ng-repeat="t in task.projectTasks" ng-init="task.getTaskAuthor(t.author); task.getProjectById(t.mark); task.getTaskTo(t.task_to)">
-                    <p class="col-xs-1">{{ task.currentProject.mark }}</p>
+                    <p class="col-xs-1">{{ t.indexMark }}</p>
                     <h4 class="col-xs-2">{{ t.title }}</h4>
                     <p class="col-xs-2">{{ task.taskAuthor.username }}</p>
                     <p class="col-xs-2">{{ task.taskTo[$index].username }}</p>

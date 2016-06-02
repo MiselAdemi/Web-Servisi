@@ -55,7 +55,6 @@ module.exports = function(app, express) {
             UserOnProject.find({ userId: req.decoded._id }, function (err, userProjects) {
                 if(err) {
                     res.send(err);
-                    console.log(err);
                     return;
                 }
 
