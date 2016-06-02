@@ -2,6 +2,7 @@ var User = require('../models/user');
 var UserOnProject = require('../models/userOnProject');
 var Project = require('../models/project');
 var config = require('../../config');
+var ObjectId = require('mongodb').ObjectID;
 var secretKey = config.secretKey;
 var jsonwebtoken = require('jsonwebtoken');
 
@@ -9,7 +10,7 @@ module.exports = function(app, express) {
 
     var router = express.Router();
 
-
+    // middleware funkcija
     router.use(function(req, res, next) {
         var token = req.body.token || req.param('token') ||req.headers['x-access-token'];
 
@@ -27,9 +28,11 @@ module.exports = function(app, express) {
         }
     });
 
-
+    // Kreiranje novog projekta
     router.route('/')
         .post(function(req, res) {
+
+            // kreiranje ovjekta novog projekta, req.body.<string> izhvaci vrednost iz <string> taga
             var project = new Project({
                 mark: req.body.mark,
                 description: req.body.description,
@@ -37,6 +40,7 @@ module.exports = function(app, express) {
                 status: "opened"
             });
 
+            // Cuvanje novo kreiranog projekta u bazu
             project.save(function (err, newProject) {
                 if(err) {
                     res.send(err);
@@ -48,14 +52,34 @@ module.exports = function(app, express) {
 
         })
         .get(function(req, res) {
-            Project.find({ author: req.decoded._id}, function(err, project) {
+            UserOnProject.find({ userId: req.decoded._id }, function (err, userProjects) {
                 if(err) {
                     res.send(err);
+                    console.log(err);
                     return;
                 }
 
-                res.json(project);
-            });
+                projectsId = [];
+
+                for( var i = 0; i < userProjects.length; i++) {
+                    projectsId.push(userProjects[i].projectId);
+                }
+
+
+                Project.find({ $or: [ { _id: { $in : projectsId }}, { author: req.decoded._id } ]  }, function (err, projects) {
+                    if(err) {
+                        res.send(err);
+                        return;
+                    }
+
+
+
+                    res.json(projects);
+                })
+            })
+
+
+
         });
 
 

@@ -8,6 +8,7 @@ angular.module('projectCtrl', ['projectService'])
         Project.allProjects()
             .success(function (data) {
                 vm.projects = data;
+                console.log(data);
             });
 
         Project.allUsers()

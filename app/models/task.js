@@ -28,6 +28,10 @@ var TaskSchema = new Schema({
     priority: {
         type: String,
         required: true
+    },
+    indexMark: {
+        type: String,
+        required: true
     }
 });
 

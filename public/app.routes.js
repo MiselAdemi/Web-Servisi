@@ -29,6 +29,9 @@ angular.module('appRoutes', ['ngRoute'])
                 controller: 'ProjectController',
                 controllerAs: 'project'
             })
+            .when('/project/:id', {
+                templateUrl: 'views/pages/project.html'
+            })
 
         $locationProvider.html5Mode(true);
 

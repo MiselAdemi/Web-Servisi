@@ -30,7 +30,7 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="app.routes.js"></script>
 </head>
-<body>
+<body >
 <div class="navbar navbar-inverse" ng-controller="AuthController as main" style="position: static;">
     <div class="navbar-inner">
         <div class="container">
@@ -47,7 +47,7 @@
                     <ul ng-if="main.loggedIn" class="nav">
                         <li ng-show="main.loggedIn">Welcome {{ main.user.username }}</li>
                         <li class="divider-vertical"></li>
-                        <li ng-show="main.isAdmin"><a href="/new_project">Add new project</a> </li>
+                        <li ng-show="isAdmin"><a href="/new_project">Add new project</a> </li>
                         <li class="divider-vertical"></li>
                         <li><a href="#" ng-click="main.doLogout()">Logout</a> </li>
                     </ul>

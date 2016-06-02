@@ -12,7 +12,7 @@
                     <h3 class="col-xs-2">Username</h3>
                     <h3 class="col-xs-2 col-xs-offset-8">Action</h3>
                 </div>
-                <div ng-if="project.potentialUsers.length > 0" class="panel-body" ng-repeat="user in project.potentialUsers">
+                <div ng-if="project.potentialUsers.length > 0" class="panel-body" ng-repeat="user in project.potentialUsers | filter: searchUser">
                     <p class="col-xs-2">{{ user.username }}</p>
 
                     <span class="col-xs-2 col-xs-offset-8">

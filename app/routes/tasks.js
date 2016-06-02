@@ -3,7 +3,7 @@ var Project = require('../models/project');
 var Task = require('../models/task');
 var config = require('../../config');
 var secretKey = config.secretKey;
-var mongo = require('mongodb');
+var ObjectId = require('mongodb').ObjectID;
 var jsonwebtoken = require('jsonwebtoken');
 
 module.exports = function(app, express) {
@@ -30,30 +30,61 @@ module.exports = function(app, express) {
 
 
     router.route('/')
-        .post(function(req, res) {
-            var task = new Task({
-                mark: req.body.mark,
-                title: req.body.title,
-                description: req.body.description,
-                author: req.decoded._id,
-                task_to: req.body.task_to,
-                status: "to_do",
-                priority: req.body.priority
-            });
+        .post(function(req, res){
 
-            task.save(function (err, newTask) {
+            var count = 0;
+            var projectName = "";
+
+            Task.find({ mark: req.body.mark }, function (err, countTasks) {
                 if(err) {
                     res.send(err);
-                    console.log(err);
                     return;
                 }
 
-                res.json({message: "Successfuly added new task!"});
-            })
+                count = countTasks.length + 1;
+
+                Project.findOne({ _id: ObjectId(req.body.mark) }, function (err, project) {
+                    if(err) {
+                        res.send(err);
+                        return;
+                    }
+
+                    projectName = project.mark + count;
+
+
+                    var task = new Task({
+                        mark: req.body.mark,
+                        title: req.body.title,
+                        description: req.body.description,
+                        author: req.decoded._id,
+                        task_to: req.body.task_to,
+                        status: "to_do",
+                        priority: req.body.priority,
+                        indexMark: projectName
+                    });
+
+                    task.save(function (err, newTask) {
+                        if(err) {
+                            res.send(err);
+                            console.log(err);
+                            return;
+                        }
+
+                        res.json({message: "Successfuly added new task!"});
+                    })
+
+
+
+                });
+
+
+            });
+
+
 
         })
         .get(function(req, res) {
-            Task.find({ author: req.decoded._id}, function(err, tasks) {
+            Task.find({ task_to: req.decoded._id}, function(err, tasks) {
                 if(err) {
                     res.send(err);
                     return;
@@ -61,6 +92,17 @@ module.exports = function(app, express) {
 
                 res.json(tasks);
             });
+        });
+
+    router.delete('/:id', function (req, res) {
+           Task.remove({ _id: req.params.id }, function (err, removed) {
+               if(err) {
+                   res.send(err);
+                   return;
+               }
+
+               res.json(removed);
+           })
         });
 
 
@@ -75,6 +117,20 @@ module.exports = function(app, express) {
 
             res.json(task);
         });
+    });
+
+    router.get('/getAllFromProject/:id', function (req, res) {
+        var projectId = req.params.id;
+
+        Task.find({ mark: projectId }, function (err, tasks) {
+            if(err) {
+                res.send(err);
+                console.log(err);
+                return;
+            }
+
+            res.json(tasks);
+        })
     });
 
 

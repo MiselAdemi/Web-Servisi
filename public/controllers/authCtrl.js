@@ -1,10 +1,10 @@
 angular.module('authCtrl', ['authService'])
 
-.controller('AuthController', function($rootScope, $location, Auth) {
+.controller('AuthController', function($rootScope, $location, Auth, $window) {
         var vm = this;
 
         vm.loggedIn = Auth.isLoggedIn();
-        vm.isAdmin = false;
+        $rootScope.isAdmin = false;
 
         $rootScope.$on('$routeChangeStart', function() {
             vm.loggedIn = Auth.isLoggedIn();
@@ -20,6 +20,7 @@ angular.module('authCtrl', ['authService'])
 
         vm.doLogin = function() {
             vm.processing = true;
+            $rootScope.isAdmin = false;
 
             vm.error = '';
 
@@ -31,10 +32,8 @@ angular.module('authCtrl', ['authService'])
                             vm.user = data.data;
                         });
 
-                    
 
                     if(data.success) {
-
                         $location.path('/dashboard');
                     }
                     else
@@ -48,7 +47,7 @@ angular.module('authCtrl', ['authService'])
 
         vm.doLogout = function() {
             Auth.logout();
-            $location.path('/');
+            $window.location.href = '/';
         };
 
         vm.getActiveUser = function () {
@@ -63,13 +62,15 @@ angular.module('authCtrl', ['authService'])
                 .success(function (data) {
                     vm.otherUser = data;
                 })
-        }
+        };
 
         vm.getAdmin = function(id) {
             Auth.getUserById(id)
                 .success(function (data) {
                     if(data.role == "admin") {
-                        vm.isAdmin = true;
+                        $rootScope.isAdmin = true;
+                    }else {
+                        $rootScope.isAdmin = false;
                     }
                 })
         }

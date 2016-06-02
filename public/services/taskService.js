@@ -8,6 +8,10 @@ angular.module('taskService', [])
             return $http.post('/tasks', taskData);
         };
 
+        taskFactory.removeTask = function(id) {
+            return $http.delete('/tasks/' + id);
+        };
+
         taskFactory.allTasks = function () {
             return $http.get('/tasks');
         };
@@ -23,6 +27,10 @@ angular.module('taskService', [])
         taskFactory.getProjectById = function(id) {
             return $http.get('/tasks/get/' + id);
         };
+
+        taskFactory.getTasksFromProject = function(id) {
+            return $http.get('/tasks/getAllFromProject/' + id);
+        }
 
         return taskFactory;
 
