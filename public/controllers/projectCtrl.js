@@ -4,11 +4,11 @@ angular.module('projectCtrl', ['projectService'])
 
         var vm = this;
         vm.projectId = $routeParams.id;
+        console.log("Project id " + vm.projectId);
 
         Project.allProjects()
             .success(function (data) {
                 vm.projects = data;
-                console.log(data);
             });
 
         Project.allUsers()
@@ -62,6 +62,5 @@ angular.module('projectCtrl', ['projectService'])
                     $window.location.reload();
                 })
         }
-
 
     });

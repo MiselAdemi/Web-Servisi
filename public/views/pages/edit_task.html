@@ -1,0 +1,65 @@
+<article class="container" style="margin-top:-18px;">
+    <br>
+
+    <section class="well well-small mePadd" ng-init="task.getTaskById(task.IdToAddTask); task.getHistory(task.IdToAddTask)">
+        <h2 class="meFont" style="padding-bottom:30px;"><span class="glyphicon glyphicon-comment"></span> Edit Task {{ task.selectedTask.indexMark }}</h2>
+
+        
+        <div class="col-lg-4 col-lg-offset-4">
+            <form method="post" ng-submit="task.updateTask()">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="input-block-level" name="title" ng-model="task.selectedTask.title", placeholder="Title">
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="input-block-level" name="description" ng-model="task.selectedTask.description" placeholder="Description" >
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" ng-model="task.selectedTask.status" ng-options="opt as opt for opt in statuses"></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Priority</label>
+                    <select name="priority" ng-model="task.selectedTask.priority" ng-options="opt as opt for opt in priority"></select>
+                </div>
+
+
+                <button type="submit" class="btn btn-success">Update task</button>
+            </form>
+        </div>
+
+    </section>
+
+    <br>
+
+    <section class="well well-small mePadd" style="clear: left;">
+        <h2 class="meFont" style="padding-bottom:30px;"><span class="glyphicon glyphicon-comment"></span> History of editing</h2>
+
+        <div class="panel panel-default">
+                <div class="panel-heading" style="overflow: hidden; ">
+                    <h3 class="col-xs-1">Mark</h3>
+                    <h3 class="col-xs-2">Title</h3>
+                    <h3 class="col-xs-3">Description</h3>
+                    <h3 class="col-xs-2">Status</h3>
+                    <h3 class="col-xs-2">Priority</h3>
+                    <h3 class="col-xs-2">Time</h3>
+                </div>
+                <div class="panel-body" ng-repeat="t in task.taskHistory | orderBy:'-'" ng-init="task.getProjectById(t.mark)">
+                    <p class="col-xs-1">{{ t.indexMark }}</p>
+                    <h4 class="col-xs-2">{{ t.title }}</h4>
+                    <p class="col-xs-3">{{ t.description }}</p>
+                    <span class="col-xs-2"><div class="badge badge-success" style="width:50px;">{{ t.status }}</div></span>
+                    <span class="col-xs-2">{{ t.priority }}</span>
+                    <span class="col-xs-2">{{ t.time }}</span><br><br><br>
+
+                    <hr>
+
+                </div>
+            </div>
+    </section>
+
+</article>

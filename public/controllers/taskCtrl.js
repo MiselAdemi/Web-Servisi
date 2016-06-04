@@ -1,6 +1,6 @@
 angular.module('taskCtrl', ['taskService'])
 
-.controller('TaskController', function($rootScope, Task, $routeParams, $location, $window) {
+.controller('TaskController', function($scope, $rootScope, Task, $routeParams, $location, $window) {
 
         var vm = this;
         vm.IdToAddTask = $routeParams.id;
@@ -14,13 +14,20 @@ angular.module('taskCtrl', ['taskService'])
             'Trivial'
         ];
 
+        $rootScope.statuses = [
+            'To Do',
+            'In Progress',
+            'Verify',
+            'Done'
+        ];
+
         $rootScope.filterOptions = {
             statuses: [
                 {id : 2, name : 'All', status: "all" },
-                {id : 3, name : 'To Do', status: "to_do" },
-                {id : 4, name : 'In Progress', status: "in_progress" },
-                {id : 5, name : 'Verify', status: "verify" },
-                {id : 6, name : 'Done', status: "done" }
+                {id : 3, name : 'To Do', status: "To Do" },
+                {id : 4, name : 'In Progress', status: "In Progress" },
+                {id : 5, name : 'Verify', status: "Verify" },
+                {id : 6, name : 'Done', status: "Done" }
             ]
         };
 
@@ -66,14 +73,16 @@ angular.module('taskCtrl', ['taskService'])
             }
         };
 
+
+
+
     vm.changeStatus = function(value) {
-            console.log(value);
+
         };
 
         Task.allTasks()
             .success(function (data) {
                 vm.tasks = data;
-                console.log(data);
             });
 
         vm.createTask = function () {
@@ -107,6 +116,7 @@ angular.module('taskCtrl', ['taskService'])
             Task.getTaskTo(id)
                 .success(function (data) {
                     vm.taskTo.push(data);
+                    console.log(vm.taskTo);
                 })
         };
 
@@ -122,6 +132,53 @@ angular.module('taskCtrl', ['taskService'])
             Task.getTasksFromProject(id)
                 .success(function (data) {
                     vm.projectTasks = data;
+                })
+        }
+
+        vm.getTaskById = function(id) {
+            Task.getTaskById(id)
+                .success(function (data) {
+                    vm.selectedTask = data;
+                })
+        }
+
+        vm.updateTask = function() {
+            Task.updateTask(vm.selectedTask)
+                .success(function (data) {
+                    vm.updatedTask = data;
+                    $window.location.reload();
+                })
+        }
+
+        vm.getHistory = function(id) {
+            Task.getHistory(id)
+                .success(function (data) {
+                    vm.taskHistory = data;
+                })
+        }
+
+
+        vm.sendComment = function(id) {
+            Task.sendComment(id, vm.newComment)
+                .success(function(data) {
+                    vm.newComment = data;
+                    $window.location.reload();
+                })
+        }
+
+        vm.getComments = function(id) {
+
+            Task.getComments(id)
+                .success(function(data) {
+                    vm.comments = data.reverse();
+                })
+        }
+
+        vm.removeComment = function(id) {
+
+            Task.removeComment(id)
+                .success(function(data) {
+                    $window.location.reload();
                 })
         }
 

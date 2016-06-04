@@ -21,19 +21,25 @@
                 </div>
 
                 <div class="panel-body" ng-if="task.projectTasks.length > 0" ng-repeat="t in task.projectTasks" ng-init="task.getTaskAuthor(t.author); task.getProjectById(t.mark); task.getTaskTo(t.task_to)">
-                    <p class="col-xs-1">{{ t.indexMark }}</p>
+                    <p class="col-xs-1"><a href="/task/{{ t._id }}">{{ t.indexMark }}</a></p>
                     <h4 class="col-xs-2">{{ t.title }}</h4>
                     <p class="col-xs-2">{{ task.taskAuthor.username }}</p>
                     <p class="col-xs-2">{{ task.taskTo[$index].username }}</p>
-                    <span class="col-xs-2"><div class="badge badge-success" style="width:50px;">{{ t.status }}</div></span>
+
+                    <span ng-if="t.status == 'To Do'" class="col-xs-2"><div class="badge badge-success" style="width:50px;">{{ t.status }}</div></span>
+                    <span ng-if="t.status == 'In Progress'" class="col-xs-2"><div class="badge badge-info" style="width:76px;">{{ t.status }}</div></span>
+                    <span ng-if="t.status == 'Verify'" class="col-xs-2"><div class="badge badge-primary" style="width:50px;">{{ t.status }}</div></span>
+                    <span ng-if="t.status == 'Done'" class="col-xs-2"><div class="badge badge-warning" style="width:50px;">{{ t.status }}</div></span>
 
                     <span class="col-xs-1">
-                        <a class="btn btn-info" href="#" data-toggle="modal" data-target="#myModal">Edit</a>
+                        <a class="btn btn-info" href="/edit_task/{{ t._id }}" data-toggle="modal" data-target="#myModal">Edit</a>
                     </span>
 
                     <span class="col-xs-1" ng-show="isAdmin">
                         <button class="btn btn-danger" ng-click="task.removeTask(t._id)">Remove</button>
-                    </span><br>
+                    </span>
+
+                    <br>
                     <hr>
 
                 </div>

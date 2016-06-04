@@ -6,6 +6,9 @@ var app = angular.module('myApp', ['appRoutes', 'authCtrl', 'authService', 'user
 
     });
 
+
+
+
 app.directive('newtask', function () {
         return {
             restrict: 'E',

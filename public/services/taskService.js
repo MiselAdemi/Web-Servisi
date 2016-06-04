@@ -32,6 +32,30 @@ angular.module('taskService', [])
             return $http.get('/tasks/getAllFromProject/' + id);
         }
 
+        taskFactory.getTaskById = function(id) {
+            return $http.get('/tasks/getTaskById/' + id);
+        }
+
+        taskFactory.updateTask = function(selectedTask) {
+            return $http.put('/tasks', selectedTask);
+        }
+
+        taskFactory.getHistory = function(id) {
+            return $http.get('/tasks/getHistory/' + id);
+        }
+
+        taskFactory.sendComment = function(id, newComment) {
+            return $http.post('/tasks/comment/' + id, newComment);
+        }
+
+        taskFactory.getComments = function(id) {
+            return $http.get('/tasks/comments/' + id);
+        }
+
+        taskFactory.removeComment = function(id) {
+            return $http.delete('/tasks/comment/' + id);
+        }
+
         return taskFactory;
 
     });

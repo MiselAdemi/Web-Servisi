@@ -1,4 +1,4 @@
-angular.module('appRoutes', ['ngRoute'])
+angular.module('appRoutes', ['ngRoute', 'authService'])
 
 .config(function ($routeProvider, $locationProvider) {
 
@@ -32,7 +32,27 @@ angular.module('appRoutes', ['ngRoute'])
             .when('/project/:id', {
                 templateUrl: 'views/pages/project.html'
             })
+            .when('/edit_task/:id', {
+                templateUrl: 'views/pages/edit_task.html',
+                controller: 'TaskController',
+                controllerAs: 'task'
+            })
+            .when('/task/:id', {
+                templateUrl: 'views/pages/task.html'
+            })
 
         $locationProvider.html5Mode(true);
+
+    })
+    .run(function ($rootScope, $location, $http, Auth) {
+
+        $rootScope.$on('$locationChangeStart', function(event, next, current) {
+            var restrictedPages = $.inArray($location.path(), ['/', '/signup']) === -1;
+            var loggedIn = Auth.isLoggedIn();
+
+            if(restrictedPages && !loggedIn)
+                $location.path('/');
+            
+        });
 
     });

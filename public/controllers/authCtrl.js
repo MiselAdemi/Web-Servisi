@@ -12,10 +12,18 @@ angular.module('authCtrl', ['authService'])
             Auth.getUser()
                 .then(function(data) {
                     vm.user = data.data;
+                    $rootScope.activeUser = data.data;
 
                     vm.getAdmin(vm.user._id);
 
                 });
+
+            var url = $location.path()
+
+            if(url == '/' || url == '/signup')
+                if(vm.loggedIn)
+                    $location.path('/dashboard');
+
         });
 
         vm.doLogin = function() {
